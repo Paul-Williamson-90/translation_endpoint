@@ -1,3 +1,4 @@
-# Docker With FastAPI Template
+# Docker With FastAPI Template Hosting Translation AI Endpoint
 
-- Quick starting point for creating a Docker container with FastAPI app
+- Quick demo of a translation AI hosted on a docker container as endpoint
+- WIP
