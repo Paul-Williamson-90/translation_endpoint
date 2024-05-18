@@ -19,11 +19,11 @@ init()
 app = FastAPI()
 
 @app.get("/ping")
-def read_root():
+def ping():
     return {"response": "Hello World!"}
 
 @app.get("/translate/{text}")
-def read_item(text: str):
+def translate(text: str):
     try:
         translation = model.generate(text)
         return {"output": translation}
