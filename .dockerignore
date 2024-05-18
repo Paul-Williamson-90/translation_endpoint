@@ -3,3 +3,5 @@
 .gitmodules
 .gitattributes
 .git
+*/__pycache__/*
+scratchpad.ipynb

@@ -1,14 +1,31 @@
 from fastapi import FastAPI
-from typing import Optional
+from fastapi.responses import JSONResponse
 
-import src
+from src.model import Model
+from src.prompts import PromptTemplate
+from src.configs import ModelConfigs
+
+
+def init():
+    global model
+
+    model = Model(
+        prompt_template=PromptTemplate(),
+        model_configs=ModelConfigs
+    )
+
+init()
 
 app = FastAPI()
 
-@app.get("/")
+@app.get("/ping")
 def read_root():
-    return {"Hello": "World"}
+    return {"response": "Hello World!"}
 
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Optional[str] = None):
-    return {"item_id": item_id, "q": q}
+@app.get("/translate/{text}")
+def read_item(text: str):
+    try:
+        translation = model.generate(text)
+        return {"output": translation}
+    except Exception as e:
+        return JSONResponse(status_code=400, content={"error": str(e)})
